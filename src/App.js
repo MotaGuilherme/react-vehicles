@@ -45,6 +45,9 @@ import './assets/demo/Demos.scss';
 import './assets/layout/layout.scss';
 import './App.scss';
 import Vehicles from "./pages/vehicles/Vehicles";
+import Auth from "./pages/vehicles/Auth";
+import AuthRegister from "./pages/vehicles/AuthRegister";
+import VehicleImage from "./service/vehicles/VehicleImage";
 
 const App = () => {
     const [layoutMode, setLayoutMode] = useState('static');
@@ -321,6 +324,11 @@ const App = () => {
                     <Route path="/empty" component={EmptyPage} />
                     <Route path="/documentation" component={Documentation} />
                     <Route path="/vehicles" component={Vehicles} />
+                    <Route path="/auth" component={Auth} />
+                    <Route path="/register" component={AuthRegister} />
+                    <Route path="/imgVehicles/:id" component={VehicleImage} />
+
+
 
                 </div>
 
@@ -338,5 +346,14 @@ const App = () => {
     );
 
 }
+
+        // return (
+        //     <div>
+        //         {
+        //             true ? <Pagina/> : <Auth/>
+        //
+        //         }
+        //     </div>
+        // )
 
 export default App;
