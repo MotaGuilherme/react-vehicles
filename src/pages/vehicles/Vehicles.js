@@ -11,6 +11,7 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { VehiclesService } from '../../service/vehicles/VehiclesService';
 import ColunaOpcoes from '../../components/ColunaOpcoes';
+import {Link} from "react-router-dom";
 
 const Vehicle = () => {
     let objetoNovo = {
@@ -150,7 +151,7 @@ const Vehicle = () => {
         return (
             <>
                 <span className="p-column-title">Model</span>
-                {rowData.brand}
+                {rowData.model}
             </>
         );
     }
@@ -159,17 +160,27 @@ const Vehicle = () => {
         return (
             <>
                 <span className="p-column-title">Price</span>
-                {rowData.brand}
+                {rowData.price}
             </>
         );
     }
+
+    const actionBodyTemplate = (rowData) => {
+        return (
+            <div className="actions">
+                <Link to={{ pathname: '/imgVehicles/' + rowData.id }}>   <Button icon="pi pi-image" className="p-button-rounded p-button-primary mr-2" /></Link>
+                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => editObjeto(rowData)} />
+                <Button icon="pi pi-trash" className="p-button-rounded p-button-warning mt-2" onClick={() => confirmDeleteObjeto(rowData)} />
+            </div>
+        );
+    }
+
 
     const header = (
         <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
             <h5 className="m-0">Vehicles</h5>
             <span className="block mt-2 md:mt-0 p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Buscar..." />
             </span>
         </div>
     );
@@ -187,6 +198,8 @@ const Vehicle = () => {
             <Button label="Sim" icon="pi pi-check" className="p-button-text" onClick={deleteObjeto} />
         </>
     );
+
+
 
     return (
         <div className="grid crud-demo">
@@ -206,7 +219,7 @@ const Vehicle = () => {
                         <Column field="model" header="Model" body={modelBodyTemplate} headerStyle={{ width: '14%', minWidth: '10rem' }}></Column>
                         <Column field="price" header="Price" body={priceBodyTemplate} headerStyle={{ width: '14%', minWidth: '10rem' }}></Column>
 
-                        <Column body={rowData => {return <ColunaOpcoes rowData={rowData} editObjeto={editObjeto} confirmDeleteObjeto={confirmDeleteObjeto}/>}}></Column>
+                        <Column body={actionBodyTemplate}></Column>
                     </DataTable>
 
                     <Dialog visible={objetoDialog} style={{ width: '450px' }} header="Cadastrar/Editar" modal className="p-fluid" footer={objetoDialogFooter} onHide={hideDialog}>
@@ -222,12 +235,12 @@ const Vehicle = () => {
                             {submitted && !objeto.brand && <small className="p-invalid">Brand é Obrigatório.</small>}
                         </div>
                         <div className="field">
-                            <label htmlFor="brand">Model</label>
+                            <label htmlFor="model">Model</label>
                             <InputText id="model" value={objeto.model} onChange={(e) => onInputChange(e, 'model')} required className={classNames({ 'p-invalid': submitted && !objeto.model })} />
                             {submitted && !objeto.model && <small className="p-invalid">Model é Obrigatório.</small>}
                         </div>
                         <div className="field">
-                            <label htmlFor="brand">Price</label>
+                            <label htmlFor="price">Price</label>
                             <InputText id="price" value={objeto.price} onChange={(e) => onInputChange(e, 'price')} required className={classNames({ 'p-invalid': submitted && !objeto.price })} />
                             {submitted && !objeto.price && <small className="p-invalid">Price é Obrigatório.</small>}
                         </div>
