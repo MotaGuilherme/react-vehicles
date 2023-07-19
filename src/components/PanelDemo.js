@@ -157,7 +157,7 @@ const PanelDemo = () => {
                                         <label htmlFor="password">Password</label>
                                     </span>
                                 </div>
-                                <Button label="Login"></Button>
+                                <Button label="Auth"></Button>
                             </div>
                         </div>
                         <div className="col-1">
