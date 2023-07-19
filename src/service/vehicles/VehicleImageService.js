@@ -5,7 +5,7 @@ import {ServiceBase} from "./ServiceBase";
 export class VehicleImageService extends ServiceBase{
 
     constructor(){
-        super("/imgVehicles/");
+        super("imgVehicles");
     }
     // url = process.env.REACT_APP_URL+'/imgVehicles'
 
@@ -19,11 +19,12 @@ export class VehicleImageService extends ServiceBase{
                 'content-type':'multipart/form-data'
             }
         }
-        return axios.post(this.url + obj.idVehicle, formData, config);
+        return axios.post(this.url , formData, config);
     }
 
     buscarPorVehicle(idVehicle){
-        return this.axiosInstance.get(this.url+"/"+idVehicle);
+        console.log('@@@@@@@@',idVehicle)
+        return this.axiosInstance.get(this.url+ "/img/" + idVehicle);
     }
 
 }

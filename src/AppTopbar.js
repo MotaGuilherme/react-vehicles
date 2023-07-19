@@ -1,8 +1,11 @@
 import React  from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import {AuthService} from "./service/vehicles/AuthService";
 
 export const AppTopbar = (props) => {
+
+    const authService = new AuthService();
 
     return (
         <div className="layout-topbar">
@@ -20,22 +23,11 @@ export const AppTopbar = (props) => {
             </button>
 
                 <ul className={classNames("layout-topbar-menu lg:flex origin-top", {'layout-topbar-menu-mobile-active': props.mobileTopbarMenuActive })}>
+
                     <li>
-                        <button className="p-link layout-topbar-button" onClick={props.onMobileSubTopbarMenuClick}>
-                            <i className="pi pi-calendar"/>
-                            <span>Events</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button className="p-link layout-topbar-button" onClick={props.onMobileSubTopbarMenuClick}>
-                            <i className="pi pi-cog"/>
-                            <span>Settings</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button className="p-link layout-topbar-button" onClick={props.onMobileSubTopbarMenuClick}>
+                        <button className="p-link layout-topbar-button" onClick={() => authService.sair()}>
                             <i className="pi pi-user"/>
-                            <span>Profile</span>
+                            <span>Sair</span>
                         </button>
                     </li>
                 </ul>

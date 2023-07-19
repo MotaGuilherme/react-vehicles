@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { config } from 'react-transition-group';
 import { AuthService } from '../vehicles/AuthService';
 
 export class ServiceBase {
@@ -46,7 +45,7 @@ export class ServiceBase {
     }
 
     buscarId(id) {
-        return this.axiosInstance.get(this.url + id);
+        return this.axiosInstance.get(this.url + '/' + id);
     }
 
     inserir(objeto) {
@@ -58,6 +57,6 @@ export class ServiceBase {
     }
 
     excluir(id) {
-        return this.axiosInstance.delete(this.url + id);
+        return this.axiosInstance.delete(this.url + "/" +id);
     }
 }

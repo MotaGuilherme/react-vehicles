@@ -12,9 +12,9 @@ import { Image } from 'primereact/image';
 
 const VehicleImagens = () => {
     let objetoNovo = {
+        idVehicle: null,
         file: null,
-        nome: null,
-        idVehicle: null
+        name: null,
     };
     let parametros = useParams();
     const [objetos, setObjetos] = useState(null);
@@ -22,7 +22,6 @@ const VehicleImagens = () => {
     const [objeto, setObjeto] = useState(objetoNovo);
     const [vehicle, setVehicle] = useState({});
     const toast = useRef(null);
-    const dt = useRef(null);
     const vehicleService = new VehiclesService();
     const vehicleImagensService = new VehicleImageService();
 
@@ -33,7 +32,6 @@ const VehicleImagens = () => {
                 buscarPorVehicle(result.data.id);
             });
         }
-        //setObjetos([{},{}])
     }, [objetos]);
 
     const buscarPorVehicle = (idVehicle) => {
@@ -53,11 +51,11 @@ const VehicleImagens = () => {
 
     const deleteObjeto = () => {
 
-        // vehicleImagensService.excluir(objeto.id).then(data => {
-        //     toast.current.show({ severity: 'success', summary: 'Sucesso', detail: 'Removido', life: 3000 });
-        //     setObjetos(null);
-        //     setObjetoDeleteDialog(false);
-        // });
+        vehicleImagensService.excluir(objeto.id).then(data => {
+            toast.current.show({ severity: 'success', summary: 'Sucesso', detail: 'Removido', life: 3000 });
+            setObjetos(null);
+            setObjetoDeleteDialog(false);
+        });
     }
 
     const uploadImagens = (event) => {
@@ -74,12 +72,10 @@ const VehicleImagens = () => {
     const renderGridItem = (data) => {
         return (
             <div className="col-12 md:col-4">
-                <div className="product-grid-item card">
                     <div className="product-grid-item-content">
-                        <Image src={'data:image;base64, ' + data.arquivo} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} preview />
+                        <Image src={'data:image;base64, '+data.arquivo} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} preview />
                         <Button icon="pi pi-times" className="p-button-danger" label="Remover" onClick={() => confirmDeleteObjeto(data)}></Button>
                     </div>
-                </div>
             </div>
         );
     }
@@ -90,10 +86,6 @@ const VehicleImagens = () => {
                 <div className="col-6" style={{ textAlign: 'left' }}>
                     <FileUpload customUpload auto uploadHandler={uploadImagens} chooseLabel="Adicionar Imagem" mode="basic" accept="image/*" maxFileSize={1000000} />
                 </div>
-                <div className="col-6" style={{ textAlign: 'right' }}>
-                    <h4>{vehicle.descricaoCurta}</h4>
-                </div>
-
             </div>
         );
     }

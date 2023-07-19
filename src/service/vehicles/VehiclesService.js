@@ -6,7 +6,7 @@ export class VehiclesService extends ServiceBase{
     //rl = process.env.REACT_APP_URL+'/vehicles'
 
     constructor(){
-        super("vehicles/");
+        super("vehicles");
     }
     inserir(objeto) {
         console.log(objeto)
@@ -15,7 +15,7 @@ export class VehiclesService extends ServiceBase{
     }
 
     alterar(objeto, id) {
-        return axios.put(this.url, objeto, id)
+        return axios.put(this.url + '/' + id, objeto)
 
     }
 

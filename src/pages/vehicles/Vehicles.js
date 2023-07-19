@@ -10,7 +10,6 @@ import { Toolbar } from 'primereact/toolbar';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { VehiclesService } from '../../service/vehicles/VehiclesService';
-import ColunaOpcoes from '../../components/ColunaOpcoes';
 import {Link} from "react-router-dom";
 
 const Vehicle = () => {

@@ -1,21 +1,21 @@
 import { Button } from 'primereact/button';
-import { Checkbox } from 'primereact/checkbox';
 import { InputText } from 'primereact/inputtext';
 import { Toast } from 'primereact/toast';
 import React, { useRef, useState } from 'react';
-import { AuthService } from '../../service/vehicles/AuthService';
-import route from "react-router-dom/es/Route";
 import {AuthRegisterService} from "../../service/vehicles/AuthRegisterService";
 
 const Auth = () => {
 
+
     const [login, setLogin] =  useState("");
     const [password, setPassword] = useState("");
+    const [role, setRole] = useState("ADMIN");
+
     const registerService = new AuthRegisterService();
     const toast = useRef(null);
 
     const register = () =>{
-        registerService.register(login, password, mostrarMensagemErro);
+        registerService.register(login, password, role, mostrarMensagemErro);
     }
 
     const mostrarMensagemErro = (erro) =>{

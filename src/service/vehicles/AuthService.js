@@ -1,5 +1,4 @@
 import axios from "axios";
-import {config} from "react-transition-group";
 
 export class AuthService {
 
@@ -14,6 +13,7 @@ export class AuthService {
 
         this.axiosInstance.interceptors.request.use((config) => {
             const token = new AuthService().getToken();
+            console.log(token)
             const authRequestToken = token ? `Bearer ${token}`: '';
             config.headers.common['Authorization'] = authRequestToken;
             return config;
@@ -26,7 +26,7 @@ export class AuthService {
     login(login, password, mensagemErro) {
         axios.post(this.url , {'login': login, 'password': password}).then(res=>{
             localStorage.setItem(this.TOKEN_KEY, res.data.token);
-            window.location.href = "/vehicles";
+            window.location.href = "/#/vehicles";
         }).catch(error=> {
             mensagemErro(error.response.data.message);
         })
@@ -38,6 +38,7 @@ export class AuthService {
 
     sair(){
         localStorage.removeItem(this.TOKEN_KEY);
+        window.location.href = "/#/auth";
     }
 
     getToken(){
